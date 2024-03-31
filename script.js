@@ -37,18 +37,35 @@ function generateFriends() {
 
 function handleCalculate(friendCount) {
     let friends = [];
+    let missingDetails = false;
+
     for (let i = 0; i < friendCount; i++) {
         const name = document.getElementById(`name${i}`).value;
         const age = document.getElementById(`age${i}`).value;
-        if (name && age) {
-            friends.push({ name, age: parseInt(age, 10) });
+       
+        // Check if either the name or age is missing
+        if (!name.trim() || !age) {
+            missingDetails = true; 
+            break; 
         }
+    
+        friends.push({ name, age: parseInt(age, 10) });
     }
 
-    if (friends.length < friendCount) {
-        alert("Please fill in all friends' details.");
+    // if (friends.length < friendCount) {
+    //     alert("Please fill in all friends' details.");
+    //     return;
+    // }
+
+    // Check if all fields were filled
+    if (missingDetails ) {
+        alert("Please fill friend's detail in all fields .");
         return;
     }
+    
+
+
+
 
     const calculationType = document.getElementById("calculationType").value;
     switch (calculationType) {
